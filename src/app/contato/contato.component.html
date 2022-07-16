@@ -8,12 +8,26 @@
     <mat-form-field class="full-width" appearance="fill">
         <mat-label>Nome: </mat-label>
         <input formControlName="nome" matInput placeholder="Digite seu nome">
+        <mat-error class="error-message" *ngIf="formulario.controls['nome'].hasError('required')">
+            Nome é <strong>obrigatório</strong>
+        </mat-error>
     </mat-form-field>
+
+    <p></p>
 
     <mat-form-field class="full-width" appearance="fill">
         <mat-label>Email:</mat-label>
         <textarea formControlName="email" matInput placeholder="Digite seu email"></textarea>
+        <mat-error class="error-message" *ngIf="formulario.controls['email'].hasError('required')">
+            Email é <strong>obrigatório</strong>
+        </mat-error>
+        <mat-error class="error-message" *ngIf="formulario.controls['email'].hasError('email')">
+            Email <strong>inválido</strong>
+        </mat-error>
     </mat-form-field>
+
+    <p></p>
+
     <p>
         <button mat-raised-button color="primary">Adicionar</button>
     </p>

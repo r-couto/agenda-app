@@ -6,4 +6,8 @@
 .full-width {
     width: 100%;
 }
+
+.error-message {
+    font-size: 15px;
+}
   
