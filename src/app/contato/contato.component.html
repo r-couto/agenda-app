@@ -4,32 +4,45 @@
     </mat-toolbar>
 </p>
 
-<form class="form-contato" [formGroup]="formulario" (ngSubmit)="submit()">
-    <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Nome: </mat-label>
-        <input formControlName="nome" matInput placeholder="Digite seu nome">
-        <mat-error class="error-message" *ngIf="formulario.controls['nome'].hasError('required')">
-            Nome é <strong>obrigatório</strong>
-        </mat-error>
-    </mat-form-field>
+<mat-tab-group>
+    <mat-tab label="Todos">
+        
+    </mat-tab>
+    <mat-tab label="Novo">
+        <mat-card class="half-width">
+            <mat-card-title>Novo Contato</mat-card-title>
+            <mat-card-subtitle>Preencha os campos e click no botão adicionar para criar um novo contato</mat-card-subtitle>
 
-    <p></p>
+            <form class="form-contato" [formGroup]="formulario" (ngSubmit)="submit()">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Nome: </mat-label>
+                    <input formControlName="nome" matInput placeholder="Digite seu nome">
+                    <mat-error class="error-message" *ngIf="formulario.controls['nome'].hasError('required')">
+                        Nome é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            
+                <p></p>
+            
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Email:</mat-label>
+                    <textarea formControlName="email" matInput placeholder="Digite seu email"></textarea>
+                    <mat-error class="error-message" *ngIf="formulario.controls['email'].hasError('required')">
+                        Email é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error class="error-message" *ngIf="formulario.controls['email'].hasError('email')">
+                        Email <strong>inválido</strong>
+                    </mat-error>
+                </mat-form-field>
+            
+                <mat-card-actions class="button-submit">
+                    <button [disabled]="!formulario.valid" mat-raised-button color="primary">Adicionar</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
 
-    <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Email:</mat-label>
-        <textarea formControlName="email" matInput placeholder="Digite seu email"></textarea>
-        <mat-error class="error-message" *ngIf="formulario.controls['email'].hasError('required')">
-            Email é <strong>obrigatório</strong>
-        </mat-error>
-        <mat-error class="error-message" *ngIf="formulario.controls['email'].hasError('email')">
-            Email <strong>inválido</strong>
-        </mat-error>
-    </mat-form-field>
+    </mat-tab>
+</mat-tab-group>
+  
 
-    <p></p>
-
-    <p>
-        <button mat-raised-button color="primary">Adicionar</button>
-    </p>
-</form>
   

@@ -22,7 +22,7 @@ export class ContatoComponent implements OnInit {
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });
-    
+
     this.contatos = [];
   }
 
@@ -34,7 +34,8 @@ export class ContatoComponent implements OnInit {
     const contato: Contato = new Contato(formValues.nome, formValues.email);
   
     this.service.save(contato).subscribe( resposta => {
-      console.log(resposta)
+      this.contatos.push(resposta);
+      console.log(this.contatos);
     });
   }
 
