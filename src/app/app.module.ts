@@ -8,6 +8,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatInputModule } from "@angular/material/input";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { ContatoService } from "./contato.service";
     MatInputModule,
     MatTabsModule,
     MatCardModule,
+    MatIconModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule

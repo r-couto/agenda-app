@@ -1,17 +1,27 @@
 <p>
     <mat-toolbar color="primary">
+        <mat-icon class="tab-icon">account_circle</mat-icon>
         <span>Contatos</span>
     </mat-toolbar>
 </p>
 
 <mat-tab-group>
-    <mat-tab label="Todos">
+    <mat-tab >
+        <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">list</mat-icon>
+            Todos
+        </ng-template>
         
     </mat-tab>
-    <mat-tab label="Novo">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">face</mat-icon>
+            Novo
+        </ng-template>
+
         <mat-card class="half-width">
-            <mat-card-title>Novo Contato</mat-card-title>
-            <mat-card-subtitle>Preencha os campos e click no botão adicionar para criar um novo contato</mat-card-subtitle>
+            <mat-card-title class="tab-title">Novo Contato</mat-card-title>
+            <mat-card-subtitle class="tab-title">Preencha os campos e click no botão Adicionar para criar um novo contato</mat-card-subtitle>
 
             <form class="form-contato" [formGroup]="formulario" (ngSubmit)="submit()">
                 <mat-form-field class="full-width" appearance="fill">
