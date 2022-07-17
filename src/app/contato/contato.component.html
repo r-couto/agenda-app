@@ -11,6 +11,32 @@
             <mat-icon class="tab-icon">list</mat-icon>
             Todos
         </ng-template>
+
+        <mat-table [dataSource]="contatos" class="full-width">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let contato"> {{contato.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nome">
+                <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                <mat-cell *matCellDef="let contato"> {{contato.nome}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                <mat-cell *matCellDef="let contato"> {{contato.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="favorito">
+                <mat-header-cell *matHeaderCellDef> Favorito </mat-header-cell>
+                <mat-cell *matCellDef="let contato"> {{contato.favorito}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: colunas"></mat-row>
+        </mat-table>
+
         
     </mat-tab>
     <mat-tab>

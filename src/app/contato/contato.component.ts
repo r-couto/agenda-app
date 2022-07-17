@@ -13,30 +13,42 @@ export class ContatoComponent implements OnInit {
 
   formulario: FormGroup;
   contatos: Contato[];
+  colunas: String[];
 
-  constructor(
-    private service: ContatoService,
-    private fb: FormBuilder
-  ) {
+  constructor( private service: ContatoService, private fb: FormBuilder ) {
     this.formulario = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });
 
     this.contatos = [];
+    this.colunas = ['id', 'nome', 'email', 'favorito'];
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.listarContatos();
+  }
+
+  listarContatos() {
+    this.service.list().subscribe(respota => {
+      this.contatos = respota;
+    });
   }
   
   submit() {
     const formValues = this.formulario.value;
     const contato: Contato = new Contato(formValues.nome, formValues.email);
-  
+
     this.service.save(contato).subscribe( resposta => {
       this.contatos.push(resposta);
-      console.log(this.contatos);
+      this.resetFormulario();  
     });
+  }
+
+  resetFormulario() {
+    this.formulario.reset();
+    this.formulario.controls['nome'].setErrors(null);
+    this.formulario.controls['email'].setErrors(null);
   }
 
 }
