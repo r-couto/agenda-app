@@ -30,7 +30,13 @@
 
             <ng-container matColumnDef="favorito">
                 <mat-header-cell *matHeaderCellDef> Favorito </mat-header-cell>
-                <mat-cell *matCellDef="let contato"> {{contato.favorito}} </mat-cell>
+                <mat-cell *matCellDef="let contato">
+                    <a href="#" (click)="favoritar(contato)">
+                        <mat-icon>
+                            {{ contato.favorito ? 'favorite' : 'favorite_border' }}
+                        </mat-icon>
+                    </a>
+                </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
