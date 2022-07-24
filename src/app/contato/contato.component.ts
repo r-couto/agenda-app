@@ -18,7 +18,7 @@ export class ContatoComponent implements OnInit {
   constructor( private service: ContatoService, private fb: FormBuilder ) {
     this.formulario = new FormGroup({});
     this.contatos = [];
-    this.colunas = ['id', 'nome', 'email', 'favorito'];
+    this.colunas = ['foto', 'id', 'nome', 'email', 'favorito'];
   }
 
   ngOnInit(): void {
@@ -50,7 +50,9 @@ export class ContatoComponent implements OnInit {
     const contato: Contato = new Contato(formValues.nome, formValues.email);
 
     this.service.save(contato).subscribe( resposta => {
-      this.contatos.push(resposta);
+      let listaContatos : Contato[] = [ ... this.contatos, resposta ];
+      this.contatos = listaContatos;
+      
       this.resetFormulario();  
     });
   }
@@ -59,6 +61,18 @@ export class ContatoComponent implements OnInit {
     this.formulario.reset();
     this.formulario.controls['nome'].setErrors(null);
     this.formulario.controls['email'].setErrors(null);
+  }
+
+  uploadFoto(event: any, contato: Contato) {
+    const files = event.target.files;
+    if (files) {
+      const foto = files[0];
+      const formData: FormData = new FormData();
+      formData.append("foto", foto);
+      this.service
+            .upload(contato, formData)
+            .subscribe(resposta => this.listarContatos());
+    }
   }
 
 }

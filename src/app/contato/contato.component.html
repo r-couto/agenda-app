@@ -13,6 +13,18 @@
         </ng-template>
 
         <mat-table [dataSource]="contatos" class="full-width">
+            <ng-container matColumnDef="foto">
+                <mat-header-cell *matHeaderCellDef>Foto</mat-header-cell>
+                <mat-cell *matCellDef="let contato">
+                    <div *ngIf="contato.foto">
+                        <img src="data:image/png;base64,{{ contato.foto }}" alt="Avatar" height="85" width="85">
+                    </div>
+                    <div *ngIf="!contato.foto">
+                        <input type="file" name="foto" (change)="uploadFoto($event, contato)" />
+                    </div>
+                </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                 <mat-cell *matCellDef="let contato"> {{contato.id}} </mat-cell>
