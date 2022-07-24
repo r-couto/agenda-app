@@ -17,7 +17,8 @@
                 <mat-header-cell *matHeaderCellDef>Foto</mat-header-cell>
                 <mat-cell *matCellDef="let contato">
                     <div *ngIf="contato.foto">
-                        <img src="data:image/png;base64,{{ contato.foto }}" alt="Avatar" height="85" width="85">
+                        <img src="data:image/png;base64,{{ contato.foto }}" alt="Avatar" height="85" width="85"
+                        (click)="visualizarContato(contato)">
                     </div>
                     <div *ngIf="!contato.foto">
                         <input type="file" name="foto" (change)="uploadFoto($event, contato)" />
