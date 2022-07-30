@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ContatoDetalheComponent } from "../contato-detalhe/contato-detalhe.component";
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contato',
@@ -28,7 +29,8 @@ export class ContatoComponent implements OnInit {
   constructor( 
     private service: ContatoService, 
     private fb: FormBuilder,
-    private dialog: MatDialog ) {
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
 
     this.formulario = new FormGroup({});
     this.contatos = [];
@@ -68,7 +70,11 @@ export class ContatoComponent implements OnInit {
 
     this.service.save(contato).subscribe( resposta => {
       this.listarContatos(this.pagina, this.tamanho);
-      this.resetFormulario();  
+      this.resetFormulario();
+      this.snackBar.open('O Contato foi adicionado!', 'Sucesso!', { 
+        duration: 2000,
+        horizontalPosition: 'right'
+      });
     });
   }
 
