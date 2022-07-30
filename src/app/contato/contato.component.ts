@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 
 import { ContatoDetalheComponent } from "../contato-detalhe/contato-detalhe.component";
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-contato',
@@ -17,6 +18,12 @@ export class ContatoComponent implements OnInit {
   formulario: FormGroup;
   contatos: Contato[];
   colunas: String[];
+
+  totalElementos: number = 0;
+  pagina: number = 0;
+  tamanho: number = 3;
+
+  pageSizeOptions: number[] = [3];
 
   constructor( 
     private service: ContatoService, 
@@ -31,7 +38,7 @@ export class ContatoComponent implements OnInit {
 
   ngOnInit(): void {
     this.montarFormulario();
-    this.listarContatos();
+    this.listarContatos(this.pagina, this.tamanho);
   }
 
   montarFormulario() {
@@ -41,9 +48,11 @@ export class ContatoComponent implements OnInit {
     });
   }
 
-  listarContatos() {
-    this.service.list().subscribe(respota => {
-      this.contatos = respota;
+  listarContatos(pagina: number = 0, tamanho: number = 10) {
+    this.service.list(pagina, tamanho).subscribe(respota => {
+      this.contatos = respota.content;
+      this.totalElementos = respota.totalElements;
+      this.pagina = respota.number;
     });
   }
 
@@ -58,9 +67,7 @@ export class ContatoComponent implements OnInit {
     const contato: Contato = new Contato(formValues.nome, formValues.email);
 
     this.service.save(contato).subscribe( resposta => {
-      let listaContatos : Contato[] = [ ... this.contatos, resposta ];
-      this.contatos = listaContatos;
-      
+      this.listarContatos(this.pagina, this.tamanho);
       this.resetFormulario();  
     });
   }
@@ -79,7 +86,7 @@ export class ContatoComponent implements OnInit {
       formData.append("foto", foto);
       this.service
             .upload(contato, formData)
-            .subscribe(resposta => this.listarContatos());
+            .subscribe(resposta => this.listarContatos(this.pagina, this.tamanho));
     }
   }
 
@@ -89,6 +96,11 @@ export class ContatoComponent implements OnInit {
       height: '450px',
       data: contato
     });
+  }
+
+  paginar(event: PageEvent) {
+    this.pagina = event.pageIndex;
+    this.listarContatos(this.pagina, this.tamanho);
   }
 
 }

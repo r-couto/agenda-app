@@ -56,6 +56,11 @@
             <mat-row *matRowDef="let row; columns: colunas"></mat-row>
         </mat-table>
 
+        <mat-paginator [length]="totalElementos"
+                       [pageSize]="tamanho"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="paginar($event)">
+        </mat-paginator>
         
     </mat-tab>
     <mat-tab>
