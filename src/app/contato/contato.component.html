@@ -96,7 +96,7 @@
                 </mat-form-field>
             
                 <mat-card-actions class="button-submit">
-                    <button [disabled]="!formulario.valid" mat-raised-button color="primary">Adicionar</button>
+                    <button [disabled]="!formulario.valid || formulario.controls['nome'].pristine || formulario.controls['email'].pristine" mat-raised-button color="primary">Adicionar</button>
                 </mat-card-actions>
             </form>
         </mat-card>

@@ -73,7 +73,8 @@ export class ContatoComponent implements OnInit {
       this.resetFormulario();
       this.snackBar.open('O Contato foi adicionado!', 'Sucesso!', { 
         duration: 2000,
-        horizontalPosition: 'right'
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
       });
     });
   }
